@@ -95,8 +95,9 @@ def main():
     """
 
     #implementation of the different types of agents! (kulang pa to)
-    simpleReflexAgent(tonton,env1)
-
+    #simpleReflexAgent(tonton,env1)
+    #modelBasedReflexAgent(tonton,env1)
+    goalBasedAgent(tonton,env1)
 
 #-----------------------------------------------------------------
 
@@ -106,6 +107,40 @@ def simpleReflexAgent(agent,environment):
     print("\nSimple Reflex Agent!\n")
     
     for x in range(10):
+        
+        if environment.things[environment.agentPosition] == 1:
+            agent.suck()
+        else:
+            if environment.agentPosition == 0:
+                agent.moveRight()
+            else:
+                agent.moveLeft()
+
+def modelBasedReflexAgent(agent,environment):
+    print("\n Model-Based Reflex Agent!\n")
+
+    model = [None,None]
+    for x in range(100):
+        model[environment.agentPosition] = environment.things[environment.agentPosition]
+        if environment.things[environment.agentPosition] == 1:
+            agent.suck()
+        else:
+            if environment.agentPosition == 0:
+                agent.moveRight()
+            else:
+                agent.moveLeft()
+        if model == [0,0]:
+            break
+
+def goalBasedAgent(agent, environment):
+    print("\n Goal-Based Reflex Agent!\n")
+
+    goal = [0,0]
+
+    for x in range(100):
+        if environment.things == goal:
+            print("goal achieved!")
+            break
         
         if environment.things[environment.agentPosition] == 1:
             agent.suck()
